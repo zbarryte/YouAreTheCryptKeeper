@@ -1,0 +1,63 @@
+package 
+{
+	import org.flixel.*;
+	
+	public class ZButton extends FlxSprite
+	{
+		public static const W:Number = 100;
+		public static const H:Number = 50;
+		
+		public var name:String;
+		public var callback:Function;
+		private var state:String;
+		
+		private var label:FlxText;
+		
+		public static const UNCURSED:String = "UNCURSED";
+		public static const CURSED:String = "CURSED";
+		public static const SELECTED:String = "SELECTED";
+		
+		public function ZButton(_x:Number=0,_y:Number=0,_graphic:Class=null,_callback:Function=null,_name:String="no name",_startState:String=ZButton.UNCURSED)
+		{
+			super(_x,_y);
+			loadGraphic(_graphic,true,false,W,H,true);
+			
+			name = _name;
+			callback = _callback;
+			
+			addAnimation(UNCURSED,[0,1,2],10,true);
+			addAnimation(CURSED,[3,4,5],10,true);
+			addAnimation(SELECTED,[6,7,8],10,false);
+			
+			switchState(_startState);
+			
+			label = new FlxText(x,y,W,name);
+		}
+		
+		public function switchState(_state:String):void {
+			state = _state;
+			play(state);
+			//FlxG.log(name + " in state: " + state);
+		}
+		
+		public function stateIs(_state:String):Boolean {
+			return (state == _state);
+		}
+		
+		
+		override public function update():void {
+			
+			super.update();
+			
+			if (stateIs(SELECTED) && finished) {
+				callback();
+				switchState(ZButton.CURSED);
+			}
+		}
+		
+		override public function draw():void {
+			super.draw();
+			label.draw();
+		}
+	}
+}
