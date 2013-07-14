@@ -10,6 +10,10 @@ package
 		
 		[Embed("assets/button.png")] public static var buttonSheet:Class;
 		
+		// characters
+		[Embed("assets/sprite_mummy.png")] public static var mummySheet:Class;
+		[Embed("assets/sprite_raider.png")] public static var raiderSheet:Class;
+		
 		[Embed("assets/tileset_level.png")] public static var tilesetLevelSheet:Class;
 		[Embed("assets/mapCSV_level_000.csv", mimeType = 'application/octet-stream')] public static const levelCSV:Class;
 		
