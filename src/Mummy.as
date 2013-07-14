@@ -32,37 +32,14 @@ package
 			loadGraphic(Glob.mummySheet,true,true,W,H,true);
 			
 			onStairs = false;
-			facing = FlxObject.RIGHT;
+			facing = FlxObject.LEFT;
 		}
 		
 		override public function update():void {
 			super.update();
-			
-			if (Glob.pressed(LEFT_KEY) && !Glob.justPressed(RIGHT_KEY)) {
-				move(THETA_225);
-			}
-			if (Glob.pressed(RIGHT_KEY) && !Glob.justPressed(LEFT_KEY)) {
-				move(THETA_315);
-			}
-			if (!Glob.pressed(RIGHT_KEY) && !Glob.pressed(LEFT_KEY)) {
-				velocity.x = 0;
-				velocity.y = 0;
-			}
 		}
 		
 		private function move(_dr:FlxPoint):void {
-			
-			/*
-			// normalize
-			var _magnitude:Number = Math.pow(Math.pow(_dr.x,2) + Math.pow(_dr.y,2),0.5);
-			var _dx:Number = _dr.x/_magnitude;
-			var _dy:Number = _dr.y/_magnitude;
-			
-			velocity.x = _dr*MOVE_VEL;
-			velocity.y = _dy*MOVE_VEL;
-			*/
-			// skip normalization by always feeding in normalized vectors
-			
 			velocity.x = _dr.x*MOVE_VEL;
 			velocity.y = _dr.y*MOVE_VEL;
 		}
