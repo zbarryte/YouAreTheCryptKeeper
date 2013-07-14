@@ -18,6 +18,7 @@ package
 			buttonIndex = 0;
 		}
 		
+		// comment
 		public function curseFoward():void {
 			var _buttonIndexNext:uint = (buttonIndex + 1 <= members.length - 1) ? buttonIndex + 1 : 0;
 			members[buttonIndex].switchState(ZButton.UNCURSED);
