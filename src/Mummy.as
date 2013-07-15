@@ -30,9 +30,10 @@ package
 		
 		private const MOVE_VEL:Number = 222;
 		
-		private var onGround:Boolean;
-		private var over:Boolean;
-		private var overDir:uint;
+		public var onGround:Boolean;
+		public var over:Boolean;
+		public var overDir:uint;
+		public var stairPoint:FlxPoint;
 		
 		public function Mummy(X:Number=0, Y:Number=0, SimpleGraphic:Class=null)
 		{
@@ -69,18 +70,30 @@ package
 					move(THETA_000);
 				}
 				else if (Glob.pressed(GROUND_045_KEY) && over && overDir == FlxObject.RIGHT) {
+					onGround = false;
+					x = stairPoint.x;
+					y = stairPoint.y;
 					move(THETA_045);
 				}
 				else if (Glob.pressed(GROUND_135_KEY) && over && overDir == FlxObject.LEFT) {
+					onGround = false;
+					x = stairPoint.x;
+					y = stairPoint.y;
 					move(THETA_135);
 				}
 				else if (Glob.pressed(GROUND_180_KEY)) {
 					move(THETA_180);
 				}
 				else if (Glob.pressed(GROUND_225_KEY) && over && overDir == FlxObject.RIGHT) {
+					onGround = false;
+					x = stairPoint.x;
+					y = stairPoint.y;
 					move(THETA_225);
 				}
 				else if (Glob.pressed(GROUND_315_KEY) && over && overDir == FlxObject.LEFT) {
+					onGround = false;
+					x = stairPoint.x;
+					y = stairPoint.y;
 					move(THETA_315);
 				}
 				else {
