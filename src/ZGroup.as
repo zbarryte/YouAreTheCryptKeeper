@@ -4,10 +4,10 @@ package
 	
 	public class ZGroup extends FlxGroup
 	{
-		private var buttonIndex:uint;
+		private var buttonIndex:uint; // current button
+		public static const SPACING:uint = 5; // spacing between buttons
 		
-		public static const SPACING:uint = 5;
-		
+		// Controls
 		private const SELECT_BUTTON_KEY:Array = ["SPACE"];
 		private const CURSE_FORWARD_KEY:Array = ["DOWN","RIGHT"];
 		private const CURSE_BACK_KEY:Array = ["UP","LEFT"];
@@ -19,18 +19,20 @@ package
 		}
 		
 		public function curseFoward():void {
+			// uncurse current button
 			var _buttonIndexNext:uint = (buttonIndex + 1 <= members.length - 1) ? buttonIndex + 1 : 0;
 			members[buttonIndex].switchState(ZButton.UNCURSED);
-			
+			// curse new button
 			buttonIndex = _buttonIndexNext;
 			members[buttonIndex].switchState(ZButton.CURSED);
 			
 		}
 		
 		public function curseBack():void {
+			// uncurse current button
 			var _buttonIndexNext:uint = (buttonIndex - 1 >= 0) ? buttonIndex - 1 : members.length - 2;
 			members[buttonIndex].switchState(ZButton.UNCURSED);
-			
+			// curse new button
 			buttonIndex = _buttonIndexNext;
 			members[buttonIndex].switchState(ZButton.CURSED);
 		}
@@ -45,7 +47,6 @@ package
 			buttonIndex = 0;
 			members[buttonIndex].switchState(ZButton.CURSED);
 		}
-		
 		
 		override public function update():void {
 			super.update();

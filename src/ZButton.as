@@ -7,12 +7,12 @@ package
 		public static const W:Number = 100;
 		public static const H:Number = 50;
 		
-		public var name:String;
-		public var callback:Function;
+		public var name:String; // can be used for debugging
+		public var callback:Function; // called when button is selected
+		private var label:FlxText; // appears on button
+		
 		private var state:String;
-		
-		private var label:FlxText;
-		
+		// state string corresponds to animation
 		public static const UNCURSED:String = "UNCURSED";
 		public static const CURSED:String = "CURSED";
 		public static const SELECTED:String = "SELECTED";
@@ -44,11 +44,8 @@ package
 			return (state == _state);
 		}
 		
-		
 		override public function update():void {
-			
 			super.update();
-			
 			if (stateIs(SELECTED) && finished) {
 				callback();
 				switchState(ZButton.CURSED);
