@@ -41,7 +41,12 @@ package
 		public function ZSprite(_x:Number=0,_y:Number=0,_simpleGraphic:Class=null)
 		{
 			super(_x,_y);
-			loadGraphic(_simpleGraphic,true,true,W,H,true);
+			if (_simpleGraphic) {
+				loadGraphic(_simpleGraphic,true,true,W,H,true);
+			} else {
+				width = W;
+				height = H;
+			}
 			
 			surface = ZSprite.GROUND;
 			drag = new FlxPoint(MOVE_DECEL,MOVE_DECEL);
@@ -90,6 +95,8 @@ package
 					}
 				}
 			}
+			
+			FlxG.log(firstStep);
 		}
 		
 		private function move():void {

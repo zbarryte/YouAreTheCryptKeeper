@@ -5,8 +5,8 @@ package
 	public class Glob extends FlxG
 	{
 		public static const DEBUG_ON:Boolean = true;
-		
 		public static const CENT:FlxPoint = new FlxPoint(FlxG.width/2.0,FlxG.height/2.0);
+		public static const GRAV_ACCEL:Number = 888;
 		
 		[Embed("assets/button.png")] public static var buttonSheet:Class;
 		
