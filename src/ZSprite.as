@@ -95,8 +95,6 @@ package
 					}
 				}
 			}
-			
-			FlxG.log(firstStep);
 		}
 		
 		private function move():void {
