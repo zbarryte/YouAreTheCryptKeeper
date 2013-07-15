@@ -46,7 +46,6 @@ package
 		override public function update():void {
 			if (!pauseGroup.isOn()) {
 				super.update();
-				
 			} else {
 				pauseGroup.update();
 			}
