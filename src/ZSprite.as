@@ -55,7 +55,7 @@ package
 		override public function update():void {
 			super.update();
 			// Is the sprite on the ground?
-			if (surface == ZSprite.GROUND) {
+			if (surface == ZSprite.GROUND && velocity.y == 0) {
 				if (Glob.pressed(GROUND_LEFT_KEY)) {
 					direction = ZSprite.LEFT;
 					move();

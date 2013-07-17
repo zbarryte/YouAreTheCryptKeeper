@@ -37,11 +37,15 @@ package
 			stairsForwardGroup = groupFromSpawn(SPAWN_STAIRS_FORWARD,FlxSprite,level);
 			for (var i:uint = 0; i < stairsForwardGroup.length; i++) {
 				stairsForwardGroup.members[i].facing = FlxObject.RIGHT;
+				stairsForwardGroup.members[i].x += -stairsForwardGroup.members[i].width/2.0;
+				stairsForwardGroup.members[i].y += -stairsForwardGroup.members[i].height - stairsForwardGroup.members[i].height/32.0;
 				stairsGroup.add(stairsForwardGroup.members[i]);
 			}
 			stairsBackGroup = groupFromSpawn(SPAWN_STAIRS_BACK,FlxSprite,level);
 			for (i = 0; i < stairsBackGroup.length; i++) {
 				stairsBackGroup.members[i].facing = FlxObject.LEFT;
+				stairsBackGroup.members[i].x += stairsForwardGroup.members[i].width/2.0;
+				stairsBackGroup.members[i].y += -stairsForwardGroup.members[i].height - stairsForwardGroup.members[i].height/32.0;
 				stairsGroup.add(stairsBackGroup.members[i]);
 			}
 			
@@ -57,9 +61,9 @@ package
 			if (!pauseGroup.isOn()) {
 				super.update();
 				
-				if (player.velocity.y > 0) {
+				/*if (!player.onStairs()) {
 					FlxG.collide(collideGroup,player);
-				}
+				}*/
 				
 				var _overlapPoint:FlxSprite = stepClosestToSprite(player);
 				if (_overlapPoint) {
@@ -71,28 +75,10 @@ package
 				
 				if (player.onGround()) {
 					player.acceleration.y = Glob.GRAV_ACCEL;
+					FlxG.collide(collideGroup,player);
 				} else if (player.onStairs()) {
 					player.acceleration.y = 0;
 				}
-				
-				/*
-				if (player.onGround()) {
-					if (player.velocity.y >= 0) {
-						FlxG.collide(collideGroup,player);
-						player.acceleration.y = Glob.GRAV_ACCEL;
-					}
-					if (_overlapPoint) {
-						player.setFirstStep(_overlapPoint);
-					} else {
-						player.setFirstStep(null);
-					}
-				} else {
-					player.acceleration.y = 0;
-					if (!_overlapPoint) {
-						player.setSurface(ZSprite.GROUND);
-					}
-				}
-				*/
 				
 			}
 			// Is the game paused?
@@ -102,7 +88,7 @@ package
 		}
 		
 		private function stepClosestToSprite(_spr:FlxSprite):FlxSprite {
-			const _MIN_DIST_SQ:Number = _spr.width*_spr.height;
+			const _MIN_DIST_SQ:Number = _spr.width*_spr.height/1.2;
 			
 			var _closest:FlxSprite = null;
 			var _closestDistSq:Number = Number.MAX_VALUE;
